@@ -3,7 +3,7 @@ import json
 import ast
 
 f = open('test.txt', 'r')
-df = pd.read_csv('eventbrite.csv')
+df = pd.read_csv('../dataset/eventbrite.csv')
 
 for line in f.readlines():
 	d = ast.literal_eval(line)

@@ -127,8 +127,8 @@ addr = ['212 Sunnyslope St. Lockport, NY 14094',
 
 gender = ['Male', 'Female', 'Non-binary']
 
-df = pd.read_csv('user_data.csv')
-df = df.sample(100)
+df = pd.read_csv('../dataset/user_data.csv')
+df = df.head(100)
 df['address'] = [' '.join(i.split()[:-2])[:-1] for i in addr[:100]]
 df['zip_code'] = [i.split()[-1] for i in addr[:100]]
 df['gender'] = [random.choice(gender) for i in range(100)]
@@ -137,4 +137,4 @@ print(df)
 
 df = df.rename(columns={'id': 'USER_ID'})
 df.reset_index(drop=True, inplace=True)
-df.to_csv('user_data_personalize.csv', index = True)
+df.to_csv('../dataset/user_data_personalize.csv', index = True)

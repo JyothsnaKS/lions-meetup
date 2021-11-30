@@ -2,8 +2,8 @@ import pandas as pd
 import random
 from datetime import datetime
 
-user_df = pd.read_csv('user_data_personalize.csv')
-item_df = pd.read_csv('eventbrite_personalize_items.csv')
+user_df = pd.read_csv('../dataset/user_data_personalize.csv')
+item_df = pd.read_csv('../dataset/eventbrite_personalize_items.csv')
 
 # item_df = item_df.astype({'ITEM_ID': int})
 # item_df = item_df.astype({'ITEM_ID': str})
@@ -54,7 +54,7 @@ print(user_item.duplicated().any())
 user_item.drop_duplicates(keep=False, inplace=True)
 
 print(user_item)
-user_item.to_csv('user_item_personalize.csv', index = True)
+user_item.to_csv('../dataset/user_item_personalize.csv', index = True)
 
 # {
 # 	"type": "record",

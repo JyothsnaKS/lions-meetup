@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv('eventbrite.csv')
+df = pd.read_csv('../dataset/eventbrite.csv')
 df = df.reset_index(drop=True)
 
 drop_cols = ['Unnamed: 0', 'url', 'vanity_url', 'changed', 'capacity', 'capacity_is_custom', 'status',\
@@ -39,7 +39,7 @@ df = df.rename(columns={'id': 'ITEM_ID'})
 print(df.columns)
 print(df.dtypes)
 df.reset_index(drop=True, inplace=True)
-df.to_csv('eventbrite_personalize_items.csv', index = True)
+df.to_csv('../dataset/eventbrite_personalize_items.csv', index = True)
 
 
 
