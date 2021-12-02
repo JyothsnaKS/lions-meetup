@@ -1,0 +1,79 @@
+swagger: '2.0'
+info:
+  description: 'API for Lions Meetup application'
+  version: 1.0.0
+  title: Lions Meetup API
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: admins
+  description: Secured Admin-only calls
+- name: developers
+  description: Operations available to regular developers
+
+paths:
+  /upcoming_events:
+    get:
+      tags:
+      - developers
+      summary: searches inventory
+      operationId: searchInventory
+      description: |
+        Displays list of events recommended for the user
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: userId
+        description: pass user ID
+        required: true
+        type: string
+      responses:
+        200:
+          description: event recommendations for
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UpcomingEventsResponse'
+        403:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  UpcomingEventsResponse:
+    type: object
+    properties:
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/Event'
+  Event:
+    type: object
+    properties:
+      id:
+        type: string
+      summary:
+        type: string
+      location:
+        type: string
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /JyothsnaKS/LionsMeetup/1.0.0
+schemes:
+ - https
