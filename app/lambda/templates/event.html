@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block body %}
+
+<!-- content -->
+<main class="my-5">
+  <div class="container">
+    <div class="card ms-5" style="width: 48rem;">
+      <img
+        src="https://mdbootstrap.com/img/new/standard/city/062.jpg"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ event["name_text"]["S"] }}</h5>
+        <p class="card-text">
+          {{ event["summary"]["S"] }}
+        </p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Starts: {{ event["start_local"]["S"] }}  Ends: {{ event["end_local"]["S"] }}</li>
+        <li class="list-group-item">Event Category: {{ event["category"]["S"] }}</li>
+        <li class="list-group-item">Mode: {{ "Online" if event["online_event"]["BOOL"] else "In Person" }}</li>
+      </ul>
+      <div class="card-body">
+        <a href="/event_discussion.html?id={{ event['item_id']['N'] }}" class="btn btn-primary m-0" role="button" rel="nofollow">
+            Go to Event Forum
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<!-- end content -->
+
+{% endblock body %}
