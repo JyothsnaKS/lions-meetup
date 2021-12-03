@@ -150,31 +150,31 @@
   <!-- Custom scripts -->
   <script type="text/javascript" src="js/script.js"></script>
   <script>
-    // $(function() {
-    //     var doc_cookie = document.cookie;
-    //     if(!doc_cookie) {
-    //       alert("Please Login!!"); // need to change , models etc.,
-    //       window.location.href = "/index.html";
-    //     } else {
-    //       cookie_pair = doc_cookie.split("=");
-    //       cookie_json = JSON.parse(cookie_pair[1]);
-    //       const queryString = (new URL(document.location)).searchParams;
-    //       console.log(queryString);
-    //       const urlParams = new URLSearchParams(queryString);
-    //       console.log(urlParams);
-    //       if(!urlParams.has("id")) {
-    //         alert("No Event ID / Invalid Event ID");
-    //       } else {
-    //         event_id = urlParams.get("id")
-    //         console.log(event_id)
-    //         fetch("https://ox7spdgpre.execute-api.us-east-1.amazonaws.com/default/serveJinja", {
-    //         method: 'GET'}).then(response => response.json())
-    //         .then(data => {
-    //           document.write(data["body"])
-    //         });
-    //       }
-    //     }
-    // });
+    $(function() {
+        var doc_cookie = document.cookie;
+        if(!doc_cookie) {
+          alert("Please Login!!"); // need to change , models etc.,
+          window.location.href = "/index.html";
+        } else {
+          cookie_pair = doc_cookie.split("=");
+          cookie_json = JSON.parse(cookie_pair[1]);
+          const queryString = (new URL(document.location)).searchParams;
+          console.log(queryString);
+          const urlParams = new URLSearchParams(queryString);
+          console.log(urlParams);
+          if(!urlParams.has("id")) {
+            alert("No Event ID / Invalid Event ID");
+          } else {
+            event_id = urlParams.get("id")
+            console.log(event_id)
+            fetch("https://ox7spdgpre.execute-api.us-east-1.amazonaws.com/default/serveJinja", {
+            method: 'GET'}).then(response => response.json())
+            .then(data => {
+              document.write(data["body"])
+            });
+          }
+        }
+    });
   </script>
 </body>
 
