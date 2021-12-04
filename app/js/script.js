@@ -77,3 +77,8 @@ function create_event() {
     });
   }
 }
+
+function logout() {
+  document.cookie = 'lions_data' + '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
+  window.location.href = "/"
+}
