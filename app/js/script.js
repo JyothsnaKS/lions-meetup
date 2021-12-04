@@ -38,5 +38,42 @@ function save_user_data() {
 }
 
 function view_event(id) {
-  window.location.href = "/event.html?event_id=" + id
+  // var doc_cookie = document.cookie;
+  window.location.href = "/event.html?event_id=" + id // + "&user_id=" + 
+}
+
+function create_event() {
+  var doc_cookie = document.cookie;
+  if (!doc_cookie) {
+    alert("Please Login!!"); // need to change , models etc.,
+    window.location.href = "/index.html";
+  } else {
+    cookie_pair = doc_cookie.split("=");
+    cookie_json = JSON.parse(cookie_pair[1]);
+    user_id = cookie_json["user_data"]["email"]
+    data = {
+      "start_local": document.getElementById("start_time"),
+      "organizer_id": user_id,
+      "name_text": document.getElementById("name"),
+      "shareable": document.getElementById("sharable"),
+      "end_local": document.getElementById("end_time"),
+      "summary": document.getElementById("description"),
+      "category": document.getElementById("category"),
+      "online_event": document.getElementById("online_event")
+    }
+    fetch('https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/create_events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
 }

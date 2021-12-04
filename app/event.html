@@ -101,15 +101,17 @@
         console.log(queryString);
         const urlParams = new URLSearchParams(queryString);
         console.log(urlParams);
-        if (!urlParams.has("id")) {
+        if (!urlParams.has("event_id")) {
           alert("No Event ID / Invalid Event ID");
+          window.location.href = "/home.html"
         } else {
-          event_id = urlParams.get("id")
+          event_id = urlParams.get("event_id")
           console.log(event_id)
-          fetch("https://ox7spdgpre.execute-api.us-east-1.amazonaws.com/default/serveJinja", {
+          fetch("https://pbfg5ityf0.execute-api.us-east-1.amazonaws.com/default/RenderEvent?event_id=" + event_id + "&user_id=" + cookie_json["user_data"]["email"], {
             method: 'GET'
           }).then(response => response.json())
             .then(data => {
+              console.log(data)
               document.write(data["body"])
             });
         }
