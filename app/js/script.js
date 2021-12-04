@@ -29,7 +29,9 @@ function login() {
   var cog_uri = "https://lionsmeetup.auth.us-east-1.amazoncognito.com/login?" + 
   "client_id=24ci6213vcpi0un21k2b51fh1d&response_type=token&scope=openid+phone+profile+email&redirect_uri="
   // console.log(cog_uri + redirect_uri)
-  window.location.href = cog_uri + "http://localhost:8080/callback.html"
+  redirect_uri = location.protocol + '//' + location.host + "/callback.html"
+  // console.log(redirect_uri)
+  window.location.href = cog_uri + redirect_uri
 }
 
 function save_user_data() {
@@ -52,16 +54,16 @@ function create_event() {
     cookie_json = JSON.parse(cookie_pair[1]);
     user_id = cookie_json["user_data"]["email"]
     data = {
-      "start_local": document.getElementById("start_time"),
+      "start_local": document.getElementById("start_time").value,
       "organizer_id": user_id,
-      "name_text": document.getElementById("name"),
-      "shareable": document.getElementById("sharable"),
-      "end_local": document.getElementById("end_time"),
-      "summary": document.getElementById("description"),
-      "category": document.getElementById("category"),
-      "online_event": document.getElementById("online_event")
+      "name_text": document.getElementById("name").value,
+      "shareable": document.getElementById("sharable").value,
+      "end_local": document.getElementById("end_time").value,
+      "summary": document.getElementById("description").value,
+      "category": document.getElementById("category").value,
+      "online_event": document.getElementById("online_event").value
     }
-    fetch('https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/create_events', {
+    fetch('https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/create-events', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,12 +72,46 @@ function create_event() {
     })
     .then(response => response.json())
     .then(data => {
-      console.log('Success:', data);
+      window.location.href = "/event_success.html"
+      console.log(data);
     })
     .catch((error) => {
-      console.error('Error:', error);
+      // window.location.href = "/event_failure.html"
+      console.log(error);
     });
   }
+}
+
+function update_profile(user_data) {
+  json_data = {
+    "email": user_data,
+    "first_name": document.getElementById("first_name").value,
+    "last_name": document.getElementById("last_name").value,
+    "mobile": document.getElementById("mobile").value,
+    "email": document.getElementById("email").value,
+    "city": document.getElementById("city").value,
+    "state": document.getElementById("state").value,
+    "zipcode": document.getElementById("zipcode").value,
+    "tags": $('#tags').val(),
+    "gender": document.getElementById("gender").value,
+  }
+  console.log(json_data)
+  fetch('https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/create-users', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(json_data),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+    // window.location.href = "/profile.html?user_id=" + user_data
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+    alert("Error Updating profile!! Please try again")
+  });
 }
 
 function logout() {

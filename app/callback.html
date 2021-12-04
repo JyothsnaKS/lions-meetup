@@ -115,7 +115,26 @@
         }
         document.cookie = document_cookie + JSON.stringify(cookie_data);
       }
-      window.location.href = "/home.html"
+      json_data = {
+        "email": user_data
+      }
+      fetch('https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/create-users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(json_data),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        window.location.href = "/home.html"
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert("Error registering user!! Please try again")
+      });
+      // window.location.href = "/home.html"
     });
   </script>
 </body>

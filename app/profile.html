@@ -48,36 +48,13 @@
   </header>
   <!--Main Navigation-->
 
-  <!-- <div class="spinner-border" role="status">
+  <div class="spinner-border" role="status">
     <span class="visually-hidden">Loading...</span>
-  </div> -->
+  </div>
+
 
 <!-- content -->
-<main class="my-5">
-  <div class="container">
-    <div class="row d-flex justify-content-center">
-      <div class="col-md-3">
-        <div class="card" style="width: 18rem;">
-          <img
-            src="https://mdbootstrap.com/img/new/standard/city/062.jpg"
-            class="card-img-top"
-            alt="..."
-          />
-          <div class="card-body">
-            <h5 class="card-title">Deepak Raj D S</h5>
-            <p class="card-text">
-              A bit about myself
-            </p>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Interests</li>
-            <li class="list-group-item">Location</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
+
 
 <!-- end content -->
 
@@ -119,10 +96,12 @@
         } else {
           cookie_pair = doc_cookie.split("=");
           cookie_json = JSON.parse(cookie_pair[1]);
-          const queryString = (new URL(document.location)).searchParams;
-          console.log(queryString);
-          const urlParams = new URLSearchParams(queryString);
-          console.log(urlParams);
+          fetch("https://pbfg5ityf0.execute-api.us-east-1.amazonaws.com/default/RenderProfile?user_id=" + cookie_json["user_data"]["email"], {
+            method: 'GET'
+          }).then(response => response.json())
+            .then(data => {
+              document.write(data["body"])
+          });
         }
     });
     </script>

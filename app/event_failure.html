@@ -56,80 +56,9 @@
   <!-- content -->
   <main class="my-5">
     <div class="container">
-      <h2 class="mb-5"><strong>Create your own Event!!</strong></h2>
-      <form>
-        <!-- Name input -->
-        <div class="form-outline mb-4">
-          <input type="text" id="name" class="form-control" />
-          <label class="form-label" for="name">Event Name</label>
-        </div>
-
-        <div class="form-outline mb-4">
-          <textarea class="form-control" id="description" rows="4"></textarea>
-          <label class="form-label" for="description">Description</label>
-        </div>
-        <div class="row mb-4">
-          <div class="col">
-            <div class="form-outline mb-4">
-              <label class="form-check-label" for="start_time"> From </label>
-              <input type="datetime-local" id="start_time" name="start_time" value="2021-12-12T19:30"
-                min="2021-12-01T00:00" max="2022-12-14T00:00">
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-outline mb-4">
-              <label class="form-check-label" for="end_time"> To </label>
-              <input type="datetime-local" id="end_time" name="end_time" value="2021-12-12T19:30" min="2021-12-01T00:00"
-                max="2022-12-14T00:00">
-            </div>
-          </div>
-        </div>
-
-        <!-- <div class="form-outline mb-4">
-          <input type="text" id="capacity" class="form-control" />
-          <label class="form-label" for="capacity">Capacity</label>
-        </div> -->
-
-        <div class="form-outline mb-4">
-          <input type="text" id="category" class="form-control" />
-          <label class="form-label" for="category">Category</label>
-        </div>
-
-        <div class="form-outline mb-4">
-          <input type="text" id="sharable" class="form-control" />
-          <label class="form-label" for="sharable">Sharable</label>
-        </div>
-        <div class="form-outline mb-4">
-          <input type="text" id="location" class="form-control" />
-          <label class="form-label" for="location">Location</label>
-        </div>
-
-        <!-- <div class="form-outline mb-4">
-          <input type="text" id="expenses" class="form-control" />
-          <label class="form-label" for="expenses">Estimated Expense</label>
-        </div> -->
-
-        <!-- Checkbox -->
-        <!-- <div class="form-check d-flex mb-4 col-12">
-          <input class="form-check-input me-2" type="checkbox" value="" id="email" checked />
-          <label class="form-check-label" for="email">
-            Email Folks
-          </label>
-        </div> -->
-
-        <div class="form-check d-flex mb-4 col-12">
-          <input class="form-check-input me-2" type="checkbox" value="" id="online_event" checked />
-          <label class="form-check-label" for="online_event">
-            Online Event
-          </label>
-        </div>
-
-        <!-- Submit button -->
-        <!-- <button type="submit" class="btn btn-primary btn-block mb-4">Create</button> -->
-        <div class="col-12">
-          <button onclick="create_event()" type="submit" class="btn btn-success">Create</button>
-        </div>
-      </form>
+      <div class="p-5 text-center">
+        <div class="bg-danger p-2 text-dark bg-opacity-10">UnSuccessful in creating the event!! Try Again</div>
+      </div>
     </div>
   </main>
 

@@ -49,88 +49,12 @@
   </header>
   <!--Main Navigation-->
 
-  <!-- <div class="spinner-border" role="status">
+  <div class="spinner-border" role="status">
     <span class="visually-hidden">Loading...</span>
-  </div> -->
+  </div>
 
   <!-- content -->
-  <main class="my-5">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <h2 class="mb-5"><strong>Update Profile</strong></h2>
-          <form>
-            <!-- Name input -->
-            <div class="form-outline mb-4">
-              <input type="text" id="first_name" class="form-control" />
-              <label class="form-label" for="name">First Name</label>
-            </div>
-            <div class="form-outline mb-4">
-              <input type="text" id="last_name" class="form-control" />
-              <label class="form-label" for="name">Last Name</label>
-            </div>
-            <div class="form-outline mb-4">
-              <input type="text" id="phone" class="form-control" />
-              <label class="form-label" for="name">Phone Number</label>
-            </div>
-            <div class="form-outline mb-4">
-              <input type="text" id="address_1" class="form-control" />
-              <label class="form-label" for="name">Address 1</label>
-            </div>
-            <div class="form-outline mb-4">
-              <input type="text" id="address_2" class="form-control" />
-              <label class="form-label" for="name">Address 2</label>
-            </div>
-            <div class="form-outline mb-4">
-              <input type="text" id="city" class="form-control" />
-              <label class="form-label" for="name">City</label>
-            </div>
-            <div class="form-outline mb-4">
-              <input type="text" id="state" class="form-control" />
-              <label class="form-label" for="name">State</label>
-            </div>
-            <div class="form-outline mb-4">
-              <input type="text" id="zipcode" class="form-control" />
-              <label class="form-label" for="name">Zip Code</label>
-            </div>
-            <div class="form-outline">
-              <label class="form-label">Select Your Interests</label>
-              <select id="interests" class="custom-select w-100 p-3 mb-4" multiple>
-                <option selected>None</option>
-                <option value="1">Sports</option>
-                <option value="2">Movies</option>
-                <option value="3">Shopping</option>
-              </select>
-            </div>
-            <!-- Submit button -->
-            <!-- <button type="submit" class="btn btn-primary btn-block mb-4">Create</button> -->
-            <div class="row">
-              <div class="col">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                  <button type="submit" class="btn btn-success">Update</button>
-                </div>
-              </div>
-              <div class="col">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <a class="btn btn-primary " href="/profile.html" role="button">
-                    View My Profile
-                  </a>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="col-md-3">
-          <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-            <img src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" class="img-fluid rounded" />
-          </div>
-          <div class="text-center">
-            <input type="file" class="form-control" id="inputGroupFile02" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
+
 
   <!-- end content -->
 
@@ -172,10 +96,13 @@
       } else {
         cookie_pair = doc_cookie.split("=");
         cookie_json = JSON.parse(cookie_pair[1]);
-        const queryString = (new URL(document.location)).searchParams;
-        console.log(queryString);
-        const urlParams = new URLSearchParams(queryString);
-        console.log(urlParams);
+        user_data = cookie_json;
+        fetch("https://pbfg5ityf0.execute-api.us-east-1.amazonaws.com/default/RenderUpdateProfile?user_id=" + cookie_json["user_data"]["email"], {
+            method: 'GET'
+          }).then(response => response.json())
+            .then(data => {
+              document.write(data["body"])
+          });
       }
     });
   </script>
