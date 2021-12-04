@@ -99,12 +99,12 @@
       } else {
         cookie_pair = doc_cookie.split("=");
         cookie_json = JSON.parse(cookie_pair[1]);
-        fetch("https://ox7spdgpre.execute-api.us-east-1.amazonaws.com/default/serveJinja", {
+        fetch("https://pbfg5ityf0.execute-api.us-east-1.amazonaws.com/default/RenderHome?user_id=" + cookie_json["user_data"]["email"], {
           method: 'GET'
         }).then(response => response.json())
           .then(data => {
             document.write(data["body"])
-          });
+        });
       }
     });
   </script>

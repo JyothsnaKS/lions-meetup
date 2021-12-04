@@ -32,7 +32,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarExample01">
           <ul class="navbar-nav ms-auto d-flex flex-row">
-          {% if "user_data" in events %} 
+          {% if "user_data" in data %} 
           <div class="btn-group">
             <button
               type="button"
@@ -40,7 +40,7 @@
               data-mdb-toggle="dropdown"
               aria-expanded="false"
             >
-              Action
+              {{ data["user_data"]["user_id"] }}
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Action</a></li>

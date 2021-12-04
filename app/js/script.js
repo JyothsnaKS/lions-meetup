@@ -36,3 +36,7 @@ function save_user_data() {
   const queryString = window.location.search;
   console.log(queryString);
 }
+
+function view_event(id) {
+  window.location.href = "/event.html?event_id=" + id
+}

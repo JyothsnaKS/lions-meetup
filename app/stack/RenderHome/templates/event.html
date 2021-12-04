@@ -11,18 +11,18 @@
         alt="..."
       />
       <div class="card-body">
-        <h5 class="card-title">{{ event["name_text"]["S"] }}</h5>
+        <h5 class="card-title">{{ event["name_text"] }}</h5>
         <p class="card-text">
-          {{ event["summary"]["S"] }}
+          {{ event["summary"] }}
         </p>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Starts: {{ event["start_local"]["S"] }}  Ends: {{ event["end_local"]["S"] }}</li>
-        <li class="list-group-item">Event Category: {{ event["category"]["S"] }}</li>
-        <li class="list-group-item">Mode: {{ "Online" if event["online_event"]["BOOL"] else "In Person" }}</li>
+        <li class="list-group-item">Starts: {{ event["start_local"] }}  Ends: {{ event["end_local"] }}</li>
+        <li class="list-group-item">Event Category: {{ event["category"] }}</li>
+        <li class="list-group-item">Mode: {{ "Online" if event["online_event"] else "In Person" }}</li>
       </ul>
       <div class="card-body">
-        <a href="/event_discussion.html?id={{ event['item_id']['N'] }}" class="btn btn-primary m-0" role="button" rel="nofollow">
+        <a href="/event_discussion.html?id={{ event['item_id'] }}" class="btn btn-primary m-0" role="button" rel="nofollow">
             Go to Event Forum
         </a>
       </div>
@@ -30,5 +30,3 @@
   </div>
 </main>
 <!-- end content -->
-
-{% endblock body %}
