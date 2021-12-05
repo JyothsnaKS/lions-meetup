@@ -63,6 +63,7 @@ function create_event() {
       "category": document.getElementById("category").value,
       "online_event": document.getElementById("online_event").value
     }
+    // console.log(data)
     fetch('https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/create-events', {
       method: 'POST',
       headers: {
@@ -72,7 +73,7 @@ function create_event() {
     })
     .then(response => response.json())
     .then(data => {
-      window.location.href = "/event_success.html"
+      window.location.href = "/event.html?event_id=" + data["body"]["item_id"]
       console.log(data);
     })
     .catch((error) => {
@@ -117,4 +118,15 @@ function update_profile(user_data) {
 function logout() {
   document.cookie = 'lions_data' + '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
   window.location.href = "/"
+}
+
+function join_event(event_id, user_id) {
+  new_event_id = event_id.split(".")[0]
+  fetch("https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/join-event?event_id=" + new_event_id + "&user_id=" + user_id, {
+    method: 'GET'
+  }).then(response => response.json())
+  .then(data => {
+    console.log(data)
+    alert("Joined!!");
+  });
 }

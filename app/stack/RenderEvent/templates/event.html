@@ -22,8 +22,11 @@
         <li class="list-group-item">Mode: {{ "Online" if event["online_event"] else "In Person" }}</li>
       </ul>
       <div class="card-body">
-        <a href="/event_discussion.html?id={{ event['item_id'] }}" class="btn btn-primary m-0" role="button" rel="nofollow">
+        <a href="/discussions.html?id={{ event['item_id'] }}" class="btn btn-primary m-0" role="button" rel="nofollow">
             Go to Event Forum
+        </a>
+        <a onclick="join_event('{{ event['item_id'] }}', '{{ data['user_data']['user_id'] }}')" class="btn btn-primary m-0" role="button" rel="nofollow">
+          Join Event
         </a>
       </div>
     </div>

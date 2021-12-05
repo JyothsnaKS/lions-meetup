@@ -27,7 +27,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{ event["name_text"] }}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">{{ event["summary"] }}</h6>
-                  <a href="/event.html?id={{ event['item_id'] }}" class="btn btn-primary">More</a>
+                  <a onclick="view_event('{{ event['item_id'] }}')" class="btn btn-primary">More</a>
                 </div>
               </div>
               {% endfor %}
