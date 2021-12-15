@@ -61,6 +61,7 @@ function create_event() {
       "end_local": document.getElementById("end_time").value,
       "summary": document.getElementById("description").value,
       "category": document.getElementById("category").value,
+      "tags": $('#tags').val(),
       "online_event": document.getElementById("online_event").value
     }
     // console.log(data)
@@ -124,7 +125,7 @@ function join_event(event_id, user_id) {
   var doc_cookie = document.cookie;
   if (!doc_cookie) {
     alert("Please Login!!"); // need to change , models etc.,
-    window.location.href = "/index.html";
+    login();
   } else {
     new_event_id = event_id.split(".")[0]
     fetch("https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/join-event?event_id=" + new_event_id + "&user_id=" + user_id, {
