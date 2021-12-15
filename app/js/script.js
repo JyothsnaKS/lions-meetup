@@ -57,7 +57,7 @@ function create_event() {
       "start_local": document.getElementById("start_time").value,
       "organizer_id": user_id,
       "name_text": document.getElementById("name").value,
-      "shareable": document.getElementById("sharable").value,
+      // "shareable": document.getElementById("sharable").value,
       "end_local": document.getElementById("end_time").value,
       "summary": document.getElementById("description").value,
       "category": document.getElementById("category").value,
@@ -121,12 +121,18 @@ function logout() {
 }
 
 function join_event(event_id, user_id) {
-  new_event_id = event_id.split(".")[0]
-  fetch("https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/join-event?event_id=" + new_event_id + "&user_id=" + user_id, {
-    method: 'GET'
-  }).then(response => response.json())
-  .then(data => {
-    console.log(data)
-    alert("Joined!!");
-  });
+  var doc_cookie = document.cookie;
+  if (!doc_cookie) {
+    alert("Please Login!!"); // need to change , models etc.,
+    window.location.href = "/index.html";
+  } else {
+    new_event_id = event_id.split(".")[0]
+    fetch("https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/join-event?event_id=" + new_event_id + "&user_id=" + user_id, {
+      method: 'GET'
+    }).then(response => response.json())
+    .then(data => {
+      console.log(data)
+      alert("Joined!!");
+    });
+  }
 }
