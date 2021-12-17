@@ -87,8 +87,10 @@ Resources:
           - arn:aws:iam::aws:policy/AmazonS3FullAccess
           - arn:aws:iam::aws:policy/CloudWatchFullAccess
           - arn:aws:iam::aws:policy/AmazonOpenSearchServiceFullAccess
+          - arn:aws:iam::aws:policy/AmazonAPIGatewayInvokeFullAccess
           - arn:aws:iam::aws:policy/AmazonAPIGatewayAdministrator
           - arn:aws:iam::aws:policy/AWSLambda_FullAccess
+          - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
       RoleName: renderRole
 
   RenderHome:
@@ -130,6 +132,39 @@ Resources:
         FunctionName: RenderIndex
         CodeUri: ./RenderIndex/
         Description: Returns update user Index page
+        Handler: lambda_function.lambda_handler
+        Runtime: python3.9
+        Role: !GetAtt iamRole.Arn
+        Timeout: 600
+
+  ConnectChat:
+    Type: AWS::Serverless::Function
+    Properties:
+        FunctionName: ConnectChat
+        CodeUri: ./ConnectChat/
+        Description: Stores User Connection ID from DynamoDB
+        Handler: lambda_function.lambda_handler
+        Runtime: python3.9
+        Role: !GetAtt iamRole.Arn
+        Timeout: 600
+
+  DisconnectChat:
+    Type: AWS::Serverless::Function
+    Properties:
+        FunctionName: DisconnectChat
+        CodeUri: ./DisconnectChat/
+        Description: Delete User Connection ID from DynamoDB
+        Handler: lambda_function.lambda_handler
+        Runtime: python3.9
+        Role: !GetAtt iamRole.Arn
+        Timeout: 600
+
+  SendMessage:
+    Type: AWS::Serverless::Function
+    Properties:
+        FunctionName: SendMessage
+        CodeUri: ./SendMessage/
+        Description: SendMessage to user
         Handler: lambda_function.lambda_handler
         Runtime: python3.9
         Role: !GetAtt iamRole.Arn

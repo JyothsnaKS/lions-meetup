@@ -73,11 +73,37 @@ Resources:
         - iamRole
         - Arn
       Timeout: 600
+  ConnectChat:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: ConnectChat
+      CodeUri: s3://aws-sam-template-stack/9c9e198cce230b68629156f13e7efb7e
+      Description: Stores User Connection ID from DynamoDB
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.9
+      Role:
+        Fn::GetAtt:
+        - iamRole
+        - Arn
+      Timeout: 600
+  DisconnectChat:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: DisconnectChat
+      CodeUri: s3://aws-sam-template-stack/9c9e198cce230b68629156f13e7efb7e
+      Description: Delete User Connection ID from DynamoDB
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.9
+      Role:
+        Fn::GetAtt:
+        - iamRole
+        - Arn
+      Timeout: 600
   RenderEvent:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderEvent
-      CodeUri: s3://aws-sam-template-stack/e7e043dbefe94ac6c5d6376dd93fa3a5
+      CodeUri: s3://aws-sam-template-stack/20536c68e646d764bcedf91791e690a3
       Description: Returns event page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
