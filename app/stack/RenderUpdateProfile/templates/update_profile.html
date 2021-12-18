@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block body %}
+
+<!-- content -->
+<main class="my-5">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2 class="mb-5"><strong>Update Profile</strong></h2>
+          <!-- Name input -->
+          <h6>First Name</h6>
+          <div class="form-outline mb-4">
+            <input type="text" {{ "value='" + user_data['first_name'] + "'" if 'first_name' in user_data else ''}} id="first_name" class="form-control" />
+          </div>
+          <h6>Last Name</h6>
+          <div class="form-outline mb-4">
+            <input type="text" {{ "value='" +  user_data['last_name'] + "'" if 'last_name' in user_data else ''}}" id="last_name" class="form-control" />
+          </div>
+          <h6>Phone Number</h6>
+          <div class="form-outline mb-4">
+            <input type="text" {{ "value='" +  user_data['mobile'] + "'" if 'mobile' in user_data else ''}}" id="mobile" class="form-control" />
+          </div>
+          <h6>Email</h6>
+          <div class="form-outline mb-4">
+            <input disabled type="text" value='{{ data["user_data"]["user_id"] }}' id="email" class="form-control" />
+          </div>
+          <h6>City</h6>
+          <div class="form-outline mb-4">
+            <input type="text" {{ "value='" +  user_data['city'] + "'" if 'city' in user_data else ''}}" id="city" class="form-control" />
+          </div>
+          <h6>State</h6>
+          <div class="form-outline mb-4">
+            <input type="text" {{ "value='" +  user_data['state'] + "'" if 'state' in user_data else ''}}" id="state" class="form-control" />
+          </div>
+          <h6>Zip Code</h6>
+          <div class="form-outline mb-4">
+            <input type="text" {{ "value='" +  user_data['zipcode'] + "'" if 'zipcode' in user_data else ''}}" id="zipcode" class="form-control" />
+          </div>
+          <div class="form-outline">
+            <!-- <label class="form-label" for="tags">Select Your Interests</label> -->
+            <select id="tags" class="custom-select w-100 p-3 mb-4" multiple>
+              <option selected>None</option>
+              <option {{"selected" if "Sports" in user_data['tags'] else ""}} value="Sports">Sports</option>
+              <option {{"selected" if "Movies" in user_data['tags'] else ""}} value="Movies">Movies</option>
+              <option {{"selected" if "Shopping" in user_data['tags'] else ""}} value="Shopping">Shopping</option>
+            </select>
+          </div>
+          <div class="form-outline">
+            <!-- <label class="form-label">Gender</label> -->
+            <select id="gender" class="custom-select w-100 p-1 mb-4">
+              <option selected>None</option>
+              <option {{"selected" if "Male" == user_data["gender"] else ""}} value="Male">Male</option>
+              <option {{"selected" if "Female" == user_data["gender"] else ""}} value="Female">Female</option>
+            </select>
+          </div>
+          <!-- Submit button -->
+          <!-- <button type="submit" class="btn btn-primary btn-block mb-4">Create</button> -->
+          <div class="row">
+            <div class="col">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <button type="submit" onclick='update_profile("{{ data["user_data"]["user_id"] }}")' class="btn btn-success">Update</button>
+              </div>
+            </div>
+            <div class="col">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-primary " href='/profile.html?user_id={{ data["user_data"]["user_id"] }}' role="button">
+                  View My Profile
+                </a>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="col-md-3">
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+          <img src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" class="img-fluid rounded" />
+        </div>
+        <div class="text-center">
+          <input type="file" class="form-control" id="inputGroupFile02" />
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<!-- end content -->
+
+{% endblock body %}
