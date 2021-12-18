@@ -10,6 +10,7 @@ drop_cols = ['Unnamed: 0', 'url', 'vanity_url', 'changed', 'capacity', 'capacity
        'logo_original_height', 'logo_url', 'logo_aspect_ratio', 'resource_uri',\
        'logo_edge_color', 'logo_edge_color_set', 'name_html', 'description_html', 'show_seatmap_thumbnail', 'show_colors_in_seatmap_thumbnail',\
        'show_pick_a_seat', 'logo_id', 'created', 'version', 'end_timezone']
+
 df = df.drop(drop_cols, axis=1)
 # df =df.astype({"shareable": str, "online_event": str, 
 # "locale": str, "is_locked": str,
@@ -35,9 +36,14 @@ df = df.fillna(0)
 df["tx_time_limit"] = df["tx_time_limit"].fillna(0)
 df =df.astype({"tx_time_limit": int, "id": str})
 df = df.rename(columns={'id': 'ITEM_ID'})
+df = df.drop_duplicates(subset='ITEM_ID', keep="last")
 
 print(df.columns)
 print(df.dtypes)
+# print(len(set(df['ITEM_ID'])))
+
+print(df[df['ITEM_ID'].duplicated() == True])
+
 df.reset_index(drop=True, inplace=True)
 df.to_csv('../dataset/eventbrite_personalize_items.csv', index = True)
 
