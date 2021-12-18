@@ -1,12 +1,10 @@
-import os
-import sys
 import json
-import requests
 import boto3
 
 def send_to_connection(connection_id, data):
     gatewayapi = boto3.client("apigatewaymanagementapi",
             endpoint_url = "https://1fgoc12ik5.execute-api.us-east-1.amazonaws.com/production")
+    print(data)
     return gatewayapi.post_to_connection(ConnectionId=connection_id,
             Data=json.dumps(data).encode('utf-8'))
 
@@ -38,14 +36,21 @@ def send_message(data):
     for connection in connections:
         send_to_connection(connection["connection_id"], data)
     save_to_chat_history(data)
-    
+
+def convert_to_nf(data):
+    import boto3 as b3
+    b3.resource('dynamodb')
+    deserializer = b3.dynamodb.types.TypeDeserializer()
+    new_record = {k: deserializer.deserialize(v) for k,v in data.items()}
+    return new_record
+
 def lambda_handler(myevent, context):
+    print(myevent)
     for record in myevent["Records"]:
-        data = dict()
-        deserializer = boto3.dynamodb.types.TypeDeserializer()
-        new_record = {k: deserializer.deserialize(v) for k,v in record["NewImage"].items()}
-        send_message(new_record)
-        send_message(data)
+        if "dynamodb" in record and "NewImage" in record["dynamodb"]:
+            new_record = convert_to_nf(record["dynamodb"]["NewImage"])
+            new_record["timestamp"] = int(new_record["timestamp"])
+            send_message(new_record)
     return {
         "statusCode": 200,
         "body": "myhtml",

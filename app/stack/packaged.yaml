@@ -22,6 +22,7 @@ Resources:
       - arn:aws:iam::aws:policy/AmazonAPIGatewayAdministrator
       - arn:aws:iam::aws:policy/AWSLambda_FullAccess
       - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
+      - arn:aws:iam::aws:policy/AmazonSESFullAccess
       RoleName: renderRole
   RenderHome:
     Type: AWS::Serverless::Function
@@ -79,7 +80,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: ConnectChat
-      CodeUri: s3://aws-sam-template-stack/ef162d86e4f41c709f094101df77838d
+      CodeUri: s3://aws-sam-template-stack/0c52717c0e7e0cdf87aa735eaed0774b
       Description: Stores User Connection ID from DynamoDB
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -92,7 +93,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: DisconnectChat
-      CodeUri: s3://aws-sam-template-stack/9c9e198cce230b68629156f13e7efb7e
+      CodeUri: s3://aws-sam-template-stack/18319209822e7681f0b6b501fbb372fb
       Description: Delete User Connection ID from DynamoDB
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -105,7 +106,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: SendMessage
-      CodeUri: s3://aws-sam-template-stack/5dc7a8ac09053da945225ad7e51db28d
+      CodeUri: s3://aws-sam-template-stack/e824139f168a69fecc940ac4b91546df
       Description: SendMessage to user
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -118,7 +119,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderDiscussions
-      CodeUri: s3://aws-sam-template-stack/fb8c7435a44e0ead0b2b05f8de1beb94
+      CodeUri: s3://aws-sam-template-stack/aa0f2f9061d64da5df0f2a58d62af450
       Description: RenderDiscussions to user
       Handler: lambda_function.lambda_handler
       Runtime: python3.9

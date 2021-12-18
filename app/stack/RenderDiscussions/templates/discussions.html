@@ -59,9 +59,8 @@
         </div>
         <div class="row">
           <div class="input-group mt-2">
-            <input type="text" class="form-control" placeholder="Type Here" aria-label="event_message"
-              aria-describedby="send_message" id="chat_message"/>
-              <a class="btn btn-primary" style="background-color: #3b5998;" onclick="send_message()" role="button"
+            <input type="text" class="form-control" placeholder="Type Here" id="post-bar"/>
+              <a class="btn btn-primary" style="background-color: #3b5998;" role="button" onclick="sendGroupMessage()"
               ><i class="fas fa-angle-right"></i></a>
           </div>
         </div>
@@ -82,39 +81,18 @@
 
 {% endif %}
 
-  $(function() {
-    cookie_json = check_cookie()
-    socket = new ReconnectingWebSocket("wss://1fgoc12ik5.execute-api.us-east-1.amazonaws.com/production");
-    const queryString = (new URL(document.location)).searchParams;
-    console.log(queryString);
-    const urlParams = new URLSearchParams(queryString);
-    console.log(urlParams);
-    event_id = urlParams.get("id")
-    console.log(event_id)
-    var user_id = cookie_json["user_data"]["email"];
-    if(!urlParams.has("id")) {
-      alert("No Event ID / Invalid Event ID");
-      window.location.href = "/home.html"
-    } else {
-      socket.onopen = function(event) {
-        data = {
-          "action": "ping",
-          "event_id": event_id
-        };
-        socket.send(JSON.stringify(data));
+function sendGroupMessage() {
+  var content = $("#post-bar").val();
+  if (content !== "") {
+      data = {
+        "action": "message", 
+        "event_id": event_id, 
+        "user_id": user_id, 
+        "message": content
       };
-    }
-
-    function send_message() {
-        data = {
-          "action": "message", 
-          "event_id": event_id, 
-          "user_id": user_id, 
-          "message": document.getElementById("chat_message").value
-        };
-        socket.send(JSON.stringify(data));
-    }
-
-  });
+      socket.send(JSON.stringify(data));
+      $("#post-bar").val("");
+  }
+}
 
 {% endblock script %}

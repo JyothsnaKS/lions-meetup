@@ -91,6 +91,7 @@ Resources:
           - arn:aws:iam::aws:policy/AmazonAPIGatewayAdministrator
           - arn:aws:iam::aws:policy/AWSLambda_FullAccess
           - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
+          - arn:aws:iam::aws:policy/AmazonSESFullAccess
       RoleName: renderRole
 
   RenderHome:
