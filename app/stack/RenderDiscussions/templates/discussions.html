@@ -22,39 +22,7 @@
       <div class="list-group col">
         <div class="row">
           <div id="chat" class="overflow-auto bg-light" style="max-width: auto; max-height:800px; height: 800px;">
-            <a href="#" class="list-group-item list-group-item-action">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">List group item heading</h5>
-                <small>3 days ago</small>
-              </div>
-              <p class="mb-1">
-                Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
-                varius blandit.
-              </p>
-              <small>Donec id elit non mi porta.</small>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">List group item heading</h5>
-                <small class="text-muted">3 days ago</small>
-              </div>
-              <p class="mb-1">
-                Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
-                varius blandit.
-              </p>
-              <small class="text-muted">Donec id elit non mi porta.</small>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">List group item heading</h5>
-                <small class="text-muted">3 days ago</small>
-              </div>
-              <p class="mb-1">
-                Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
-                varius blandit.
-              </p>
-              <small class="text-muted">Donec id elit non mi porta.</small>
-            </a>
+
           </div>
         </div>
         <div class="row">
@@ -83,16 +51,48 @@
 
 function sendGroupMessage() {
   var content = $("#post-bar").val();
+  var u_data = check_cookie()["user_data"]
   if (content !== "") {
       data = {
         "action": "message", 
         "event_id": event_id, 
-        "user_id": user_id, 
-        "message": content
+        "user_id": u_data["user_id"], 
+        "message": content,
+        "given_name": u_data["given_name"]
       };
+      console.log(data)
       socket.send(JSON.stringify(data));
       $("#post-bar").val("");
+      temp_chat_box = `
+        <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+      `
+      temp_chat_box += '<h5 class="mb-1">You</h5>'
+      var dt = new Date();
+      temp_chat_box += '<small class="text-muted">' + dt.toDateString() + "  " + dt.toLocaleTimeString() + '</small></div>'
+      temp_chat_box += '<p class="mb-1">' + data["message"] + '</p></a>'
+      $("#chat").append(temp_chat_box);
+      $("#chat").children().last()[0].scrollIntoView();
   }
 }
 
+socket.onmessage = function(message) {
+  var data = JSON.parse(message.data);
+  var u_data = check_cookie()["user_data"]
+  console.log(data);
+  temp_chat_box = `
+        <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+      `
+  if (data["user_id"] != u_data["user_id"]) {
+    temp_chat_box += '<h5 class="mb-1">' + data["given_name"] + '</h5>'
+    var dt = new Date(+data["timestamp"] * 1000);
+    temp_chat_box += '<small class="text-muted">' + dt.toDateString() + "  " + dt.toLocaleTimeString() + '</small></div>'
+    temp_chat_box += '<p class="mb-1">' + data["message"] + '</p></a>'
+    $("#chat").append(temp_chat_box);
+    $("#chat").children().last()[0].scrollIntoView();
+  }
+};
+
+get_chat_history('{{ curr_event["item_id"] }}')
 {% endblock script %}

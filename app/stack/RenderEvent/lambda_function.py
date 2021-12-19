@@ -27,13 +27,17 @@ def lambda_handler(event, context):
     joined_events = []
     if "body" in joined_resp_json:
         joined_events = json.loads(joined_rec_resp.json()["body"])
-        
+    joined = False
+    state = list(filter(lambda x: x["event_id"] == event_id), joined_events)
+    if state:
+        joined = True
     env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "templates"), encoding="utf8"))
     template = env.get_template("event.html")
     html = template.render(
-     data = data,
-     event = event_details,
-     not_found = not_found
+        data = data,
+        event = event_details,
+        not_found = not_found,
+        joined = joined
     )
     return response(html)
 

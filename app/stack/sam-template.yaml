@@ -70,6 +70,32 @@ Resources:
   #                 passthroughBehavior: "when_no_match"
   #                 type: "mock"
 
+  lionsBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: lions-photos-cf
+      AccessControl: PublicRead
+      Tags:
+        - Key: "env"
+          Value: "test"
+
+  lionsBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref lionsBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal: '*'
+            Action: 
+              - 's3:GetObject'
+            Resource: !Join
+              - ''
+              - - 'arn:aws:s3:::'
+                - !Ref lionsBucket
+                - /*
+
   iamRole:
     Type: AWS::IAM::Role
     Properties: 
@@ -177,6 +203,28 @@ Resources:
         FunctionName: RenderDiscussions
         CodeUri: ./RenderDiscussions/
         Description: RenderDiscussions to user
+        Handler: lambda_function.lambda_handler
+        Runtime: python3.9
+        Role: !GetAtt iamRole.Arn
+        Timeout: 600
+
+  GeoLocation:
+    Type: AWS::Serverless::Function
+    Properties:
+        FunctionName: GeoLocation
+        CodeUri: ./GeoLocation/
+        Description: GeoLocation to user
+        Handler: lambda_function.lambda_handler
+        Runtime: python3.9
+        Role: !GetAtt iamRole.Arn
+        Timeout: 600
+
+  GetChatHistory:
+    Type: AWS::Serverless::Function
+    Properties:
+        FunctionName: GetChatHistory
+        CodeUri: ./GetChatHistory/
+        Description: GetChatHistory to user
         Handler: lambda_function.lambda_handler
         Runtime: python3.9
         Role: !GetAtt iamRole.Arn

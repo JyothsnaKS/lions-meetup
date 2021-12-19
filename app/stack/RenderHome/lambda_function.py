@@ -7,12 +7,17 @@ from jinja2 import Environment, FileSystemLoader
 def lambda_handler(event, context):
     # print(event)
     user_id = event["user_id"]
-    recommended_events_url = "https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/recommended_events"
-    joined_events_url = "https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/display_my_events"
-    rec_resp = requests.get(recommended_events_url)
-    recommended_events = json.loads(rec_resp.json()["body"])
+    recommended_events_url = "https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/recommended_events?user_id" + user_id
+    joined_events_url = "https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/display_my_events?user_id" + user_id
+    # rec_resp = requests.get(recommended_events_url)
+    # print(rec_resp.json())
+    # recommended_events = json.loads(rec_resp.json()["body"])
+    recommended_events = []
     joined_rec_resp = requests.get(joined_events_url)
-    joined_events = json.loads(joined_rec_resp.json()["body"])
+    joined_resp_json = joined_rec_resp.json()
+    joined_events = []
+    if "body" in joined_resp_json:
+        joined_events = json.loads(joined_rec_resp.json()["body"])
     # print([event for event in recommended_events])
     data = {
         "upcoming_events": joined_events,

@@ -23,11 +23,13 @@
       </ul>
       <div class="card-body">
         <a href="/discussions.html?id={{ event['item_id'] }}" class="btn btn-primary m-0" role="button" rel="nofollow">
-            Go to Event Forum
+            Go to Events Forum
         </a>
+        {% if not joined %}
         <a onclick="join_event('{{ event['item_id'] }}', '{{ data['user_data']['user_id'] }}')" class="btn btn-primary m-0" role="button" rel="nofollow">
           Join Event
         </a>
+        {% endif %}
       </div>
     </div>
   </div>

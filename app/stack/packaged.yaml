@@ -1,6 +1,32 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
 Resources:
+  lionsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: lions-photos-cf
+      AccessControl: PublicRead
+      Tags:
+      - Key: env
+        Value: test
+  lionsBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: lionsBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+        - Effect: Allow
+          Principal: '*'
+          Action:
+          - s3:GetObject
+          Resource:
+            Fn::Join:
+            - ''
+            - - 'arn:aws:s3:::'
+              - Ref: lionsBucket
+              - /*
   iamRole:
     Type: AWS::IAM::Role
     Properties:
@@ -28,7 +54,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderHome
-      CodeUri: s3://aws-sam-template-stack/ce54e427c9e618faae9c89bd44723af5
+      CodeUri: s3://aws-sam-template-stack/f7bd57f3183896336217a86216e5a584
       Description: Returns user home page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -41,7 +67,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderProfile
-      CodeUri: s3://aws-sam-template-stack/7424f418452b9432207996a044f9deeb
+      CodeUri: s3://aws-sam-template-stack/3b6d39039173deb73101a9dee9f186c7
       Description: Returns user proofile page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -54,7 +80,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderUpdateProfile
-      CodeUri: s3://aws-sam-template-stack/0f528f82b255d28ffc74d840bbaffd3a
+      CodeUri: s3://aws-sam-template-stack/1ffa7b8e4f064f0f4922500ac4ec1e30
       Description: Returns update user proofile page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -106,7 +132,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: SendMessage
-      CodeUri: s3://aws-sam-template-stack/e824139f168a69fecc940ac4b91546df
+      CodeUri: s3://aws-sam-template-stack/1f083b0b75e67e30354c9c4fdb50d0cf
       Description: SendMessage to user
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -119,8 +145,34 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderDiscussions
-      CodeUri: s3://aws-sam-template-stack/aa0f2f9061d64da5df0f2a58d62af450
+      CodeUri: s3://aws-sam-template-stack/aa0542b0ae4c200631ad4a5c6f04d371
       Description: RenderDiscussions to user
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.9
+      Role:
+        Fn::GetAtt:
+        - iamRole
+        - Arn
+      Timeout: 600
+  GeoLocation:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: GeoLocation
+      CodeUri: s3://aws-sam-template-stack/5632caa53d674f738defa8d6b6c76ad7
+      Description: GeoLocation to user
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.9
+      Role:
+        Fn::GetAtt:
+        - iamRole
+        - Arn
+      Timeout: 600
+  GetChatHistory:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: GetChatHistory
+      CodeUri: s3://aws-sam-template-stack/a8913bc4f179a51ef933a613abaeff0c
+      Description: GetChatHistory to user
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
       Role:
@@ -132,7 +184,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderEvent
-      CodeUri: s3://aws-sam-template-stack/20536c68e646d764bcedf91791e690a3
+      CodeUri: s3://aws-sam-template-stack/2399f1f0795d769091ba053b730a1de9
       Description: Returns event page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
