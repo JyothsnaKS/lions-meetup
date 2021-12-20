@@ -230,6 +230,17 @@ Resources:
         Role: !GetAtt iamRole.Arn
         Timeout: 600
 
+  GetEventMembers:
+    Type: AWS::Serverless::Function
+    Properties:
+        FunctionName: GetEventMembers
+        CodeUri: ./GetEventMembers/
+        Description: GetEventMembers to user
+        Handler: lambda_function.lambda_handler
+        Runtime: python3.9
+        Role: !GetAtt iamRole.Arn
+        Timeout: 600
+
   RenderEvent:
     Type: AWS::Serverless::Function
     Properties:

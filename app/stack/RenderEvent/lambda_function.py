@@ -28,7 +28,7 @@ def lambda_handler(event, context):
     if "body" in joined_resp_json:
         joined_events = json.loads(joined_rec_resp.json()["body"])
     joined = False
-    state = list(filter(lambda x: x["event_id"] == event_id), joined_events)
+    state = list(filter(lambda x: x["event_id"] == event_id, joined_events))
     if state:
         joined = True
     env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "templates"), encoding="utf8"))

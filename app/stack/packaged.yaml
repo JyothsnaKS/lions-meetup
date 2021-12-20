@@ -54,7 +54,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderHome
-      CodeUri: s3://aws-sam-template-stack/f7bd57f3183896336217a86216e5a584
+      CodeUri: s3://aws-sam-template-stack/2c8ae1498b6c41c7ecb01b83a8a9ec8d
       Description: Returns user home page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -67,7 +67,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderProfile
-      CodeUri: s3://aws-sam-template-stack/3b6d39039173deb73101a9dee9f186c7
+      CodeUri: s3://aws-sam-template-stack/a275b5a08c9d14cecdfb40f8dde7e74b
       Description: Returns user proofile page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -80,7 +80,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderUpdateProfile
-      CodeUri: s3://aws-sam-template-stack/1ffa7b8e4f064f0f4922500ac4ec1e30
+      CodeUri: s3://aws-sam-template-stack/491f027504080a33c22fbd68f8f7b66e
       Description: Returns update user proofile page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -93,7 +93,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderIndex
-      CodeUri: s3://aws-sam-template-stack/ecf877f6fd3c43c0cf563d41fd2b28c9
+      CodeUri: s3://aws-sam-template-stack/911b010e3de473acb5161b423a25fedb
       Description: Returns update user Index page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -145,7 +145,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderDiscussions
-      CodeUri: s3://aws-sam-template-stack/aa0542b0ae4c200631ad4a5c6f04d371
+      CodeUri: s3://aws-sam-template-stack/8640b826dd07309a8c46421c56804757
       Description: RenderDiscussions to user
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -184,7 +184,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderEvent
-      CodeUri: s3://aws-sam-template-stack/2399f1f0795d769091ba053b730a1de9
+      CodeUri: s3://aws-sam-template-stack/5d8fa00a48827163dac2b7373a292e04
       Description: Returns event page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
