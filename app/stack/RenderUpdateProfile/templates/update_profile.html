@@ -28,6 +28,11 @@
 
           <h6 style="padding-top: 5%; padding-bottom: 5%;">Or Enter City State And Zip Below</h6>
 
+          <h6>Address</h6>
+          <div class="form-outline mb-4">
+            <input type="text" {{ "value='" +  user_data['address'] + "'" if 'address' in user_data else ''}}" id="address" class="form-control" />
+          </div>
+
           <h6>City</h6>
           <div class="form-outline mb-4">
             <input type="text" {{ "value='" +  user_data['city'] + "'" if 'city' in user_data else ''}}" id="city" class="form-control" />
