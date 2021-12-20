@@ -3,6 +3,8 @@ import json
 import requests
 from jinja2 import Environment, FileSystemLoader
 
+
+
 def lambda_handler(event, context):
     # print(event)
     user_id = event["user_id"]
@@ -12,6 +14,7 @@ def lambda_handler(event, context):
     print(rec_resp.json())
     res_json = rec_resp.json()
     not_found = False
+    joined = False
     if res_json["statusCode"] != 200:
         not_found = True
     event_details = res_json["body"]
@@ -21,23 +24,22 @@ def lambda_handler(event, context):
           "user_id" : user_id
         }
     }
-    joined_events_url = "https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/display_my_events"
-    joined_rec_resp = requests.get(joined_events_url)
-    joined_resp_json = joined_rec_resp.json()
-    joined_events = []
-    if "body" in joined_resp_json:
-        joined_events = json.loads(joined_rec_resp.json()["body"])
-    joined = False
-    state = list(filter(lambda x: x["event_id"] == event_id, joined_events))
-    if state:
-        joined = True
+    eve_mem_url = "https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/get_event_members?event_id=" + str(event_id)
+    rec_resp = requests.get(eve_mem_url)
+    print(rec_resp.json())
+    res_json = rec_resp.json()
+    event_members = []
+    if res_json["statusCode"] == 200:
+        event_members = res_json["body"]
+        joined = True if list(filter(lambda x: (x["user_id"] == user_id or x["email"] == user_id), event_members)) else False
     env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "templates"), encoding="utf8"))
     template = env.get_template("event.html")
     html = template.render(
         data = data,
         event = event_details,
         not_found = not_found,
-        joined = joined
+        joined = joined,
+        event_members = event_members
     )
     return response(html)
 
