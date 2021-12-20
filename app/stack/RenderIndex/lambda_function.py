@@ -7,13 +7,13 @@ from jinja2 import Environment, FileSystemLoader
 def lambda_handler(event, context):
     # print(event)
     # user_id = event["user_id"]
-    recommended_events_url = "https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/recommended_events"
-    rec_resp = requests.get(recommended_events_url)
-    recommended_events = json.loads(rec_resp.json()["body"])
+    random_events_url = "https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/get_random_events"
+    rec_resp = requests.get(random_events_url)
+    print(rec_resp.json())
+    random_events = rec_resp.json()["body"]
     # print([event for event in recommended_events])
     data = {
-        "upcoming_events": [],
-        "recommended_events": recommended_events
+        "random_events": random_events
     }
     env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "templates"), encoding="utf8"))
     template = env.get_template("index.html")
