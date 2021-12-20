@@ -16,7 +16,7 @@ def lambda_handler(event, context):
     joined_rec_resp = requests.get(joined_events_url)
     joined_resp_json = joined_rec_resp.json()
     joined_events = []
-    if "body" in joined_resp_json:
+    if joined_resp_json["statusCode"] == 200 and "body" in joined_resp_json:
         joined_events = json.loads(joined_rec_resp.json()["body"])
     # print([event for event in recommended_events])
     data = {
