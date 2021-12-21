@@ -24,14 +24,14 @@ def lambda_handler(event, context):
           "user_id" : user_id
         }
     }
-    eve_mem_url = "https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/get_event_members?event_id=" + str(event_id)
-    rec_resp = requests.get(eve_mem_url)
-    print(rec_resp.json())
-    res_json = rec_resp.json()
-    event_members = []
-    if res_json["statusCode"] == 200:
-        event_members = res_json["body"]
-        joined = True if list(filter(lambda x: (x["user_id"] == user_id or x["email"] == user_id), event_members)) else False
+    # eve_mem_url = "https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/get_event_members?event_id=" + str(event_id)
+    # rec_resp = requests.get(eve_mem_url)
+    # print(rec_resp.json())
+    # res_json = rec_resp.json()
+    event_members = event_details["attendees"] if "attendees" in event_details else [] 
+    # if res_json["statusCode"] == 200:
+    #     event_members = res_json["body"]
+    joined = True if list(filter(lambda x: (x["user_id"] == user_id or x["email"] == user_id), event_details["attendees"])) else False
     env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "templates"), encoding="utf8"))
     template = env.get_template("event.html")
     html = template.render(

@@ -20,12 +20,14 @@
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Email: {{ data["user_data"]["user_id"] }} </li>
-            <li class="list-group-item">Interests: {{ ",".join(user_data["tags"]) if "tags" in user_data else "Missing Interests...Update Profile!!" }}</li>
+            <li class="list-group-item">Interests: {{ ",".join(user_data["categories"]) if "categories" in user_data else "Missing Interests...Update Profile!!" }}</li>
             <li class="list-group-item">Location: {{ user_data["city"] if "city" in user_data else "Missing Location...Update Profile!!" }}</li>
           </ul>
         </div>
-        <a href='/update_profile.html?user_id={{ data["user_data"]["user_id"] }}' class="mt-2 btn btn-warning">Update Profile</a>
-      </div>
+        {% if data["curr_user_id"] ==  data["user_data"]["user_id"] %}
+          <a href='/update_profile.html?user_id={{ data["user_data"]["user_id"] }}' class="mt-2 btn btn-warning">Update Profile</a>
+        {% endif %}
+        </div>
     </div>
   </div>
 </main>

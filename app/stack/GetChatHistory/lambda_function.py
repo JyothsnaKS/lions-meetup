@@ -15,8 +15,9 @@ def get_chat_history(event_id):
 def lambda_handler(myevent, context):
     event_id = myevent["event_id"]
     chat_history = get_chat_history(event_id)
+    s_chat_history = sorted(chat_history, key = lambda k:k["timestamp"])
     # userId = myevent["requestContext"].get("connectionId")
     return {
         "statusCode": 200,
-        "body": chat_history
+        "body": s_chat_history
     }

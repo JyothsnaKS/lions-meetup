@@ -41,10 +41,10 @@
               data-mdb-toggle="dropdown"
               aria-expanded="false"
             >
-              {{ data["user_data"]["user_id"] }}
+              {{ data["curr_user_id"] if data["curr_user_id"] else data["user_data"]["user_id"]  }}
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href='/profile.html?user_id={{ data["user_data"]["user_id"] }}'>Profile</a></li>
+              <li><a class="dropdown-item" href='/profile.html?id={{ data["curr_user_id"] if data["curr_user_id"] else data["user_data"]["user_id"] }}'>Profile</a></li>
               <li>
                 <hr class="dropdown-divider" />
               </li>

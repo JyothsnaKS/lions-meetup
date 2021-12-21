@@ -54,7 +54,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderHome
-      CodeUri: s3://aws-sam-template-stack/1c61f1719b3e6d19904d8668b562afb3
+      CodeUri: s3://aws-sam-template-stack/32d549ba2062d5569d42cca733df0c87
       Description: Returns user home page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -67,7 +67,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderProfile
-      CodeUri: s3://aws-sam-template-stack/a275b5a08c9d14cecdfb40f8dde7e74b
+      CodeUri: s3://aws-sam-template-stack/1ce311698d359cb1ecb59390172c6054
       Description: Returns user proofile page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -80,7 +80,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderUpdateProfile
-      CodeUri: s3://aws-sam-template-stack/a2d02e36575789f7a8f6c0dda8019ae9
+      CodeUri: s3://aws-sam-template-stack/36aa5166dacc4f1ca4a14a87623ef54a
       Description: Returns update user proofile page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -93,7 +93,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderIndex
-      CodeUri: s3://aws-sam-template-stack/2dcf77a0b36ec689a9f509b3f4b4515b
+      CodeUri: s3://aws-sam-template-stack/167810bda402665077f9ac35d90eb16f
       Description: Returns update user Index page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -145,7 +145,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderDiscussions
-      CodeUri: s3://aws-sam-template-stack/a552f15e916061c7c6d22b25b39030c4
+      CodeUri: s3://aws-sam-template-stack/76675aab51396c7acd40c1b8e4736f3b
       Description: RenderDiscussions to user
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -171,7 +171,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: GetChatHistory
-      CodeUri: s3://aws-sam-template-stack/a8913bc4f179a51ef933a613abaeff0c
+      CodeUri: s3://aws-sam-template-stack/faa366038fa0f13642849fc625665340
       Description: GetChatHistory to user
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -193,11 +193,24 @@ Resources:
         - iamRole
         - Arn
       Timeout: 600
+  RenderSearch:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: RenderSearch
+      CodeUri: s3://aws-sam-template-stack/979b7ffe169bfd6229140148f4120893
+      Description: RenderSearch to user
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.9
+      Role:
+        Fn::GetAtt:
+        - iamRole
+        - Arn
+      Timeout: 600
   RenderEvent:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderEvent
-      CodeUri: s3://aws-sam-template-stack/485f05a80ee359e65c9c955c69f7eb06
+      CodeUri: s3://aws-sam-template-stack/185dd9d4451f98d983df55c55723b637
       Description: Returns event page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9

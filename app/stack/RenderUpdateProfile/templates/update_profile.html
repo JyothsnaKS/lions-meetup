@@ -20,6 +20,10 @@
           <div class="form-outline mb-4">
             <input type="text" {{ "value='" +  user_data['mobile'] + "'" if 'mobile' in user_data else ''}}" id="mobile" class="form-control" />
           </div>
+          <h6>Age</h6>
+          <div class="form-outline mb-4">
+            <input type="text" {{ "value='" +  user_data['age'] + "'" if 'age' in user_data else ''}}" id="age" class="form-control" />
+          </div>
           <h6>Email</h6>
           <div class="form-outline mb-4">
             <input disabled type="text" value='{{ data["user_data"]["user_id"] }}' id="email" class="form-control" />
@@ -43,16 +47,16 @@
           </div>
           <h6>Zip Code</h6>
           <div class="form-outline mb-4">
-            <input type="text" {{ "value='" +  user_data['zipcode'] + "'" if 'zipcode' in user_data else ''}}" id="zipcode" class="form-control" />
+            <input type="text" {{ "value='" +  user_data['zip_code'] + "'" if 'zip_code' in user_data else ''}}" id="zip_code" class="form-control" />
           </div>
           <h6>Interests</h6>
+          {% set tags = ['food-and-drink','health', 'business', 'fashion', 'science-and-tech', 'sports-and-fitness', 'travel-and-outdoor', 'spirituality','charity-and-causes', 'auto-boat-and-air', 'film-and-media'] %}
           <div class="form-outline">
             <!-- <label class="form-label" for="tags">Select Your Interests</label> -->
             <select id="categories" class="custom-select w-100 p-3 mb-4" multiple>
-              <option>None</option>
-              <option {{"selected" if "Sports" in user_data['categories'] else ""}} value="Sports">Sports</option>
-              <option {{"selected" if "Movies" in user_data['categories'] else ""}} value="Movies">Movies</option>
-              <option {{"selected" if "Shopping" in user_data['categories'] else ""}} value="Shopping">Shopping</option>
+              {% for tag in tags %}
+                <option {{"selected" if tag in user_data['categories'] else ""}} value="{{tag}}">{{tag | replace("-", " ")}}</option>
+              {% endfor %}
             </select>
           </div>
           <h6>Gender</h6>
@@ -80,7 +84,7 @@
             </div>
             <div class="col">
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a class="btn btn-primary " href='/profile.html?user_id={{ data["user_data"]["user_id"] }}' role="button">
+                <a class="btn btn-primary " href='/profile.html?id={{ data["user_data"]["user_id"] }}' role="button">
                   View My Profile
                 </a>
               </div>

@@ -241,6 +241,17 @@ Resources:
         Role: !GetAtt iamRole.Arn
         Timeout: 600
 
+  RenderSearch:
+    Type: AWS::Serverless::Function
+    Properties:
+        FunctionName: RenderSearch
+        CodeUri: ./RenderSearch/
+        Description: RenderSearch to user
+        Handler: lambda_function.lambda_handler
+        Runtime: python3.9
+        Role: !GetAtt iamRole.Arn
+        Timeout: 600
+
   RenderEvent:
     Type: AWS::Serverless::Function
     Properties:
