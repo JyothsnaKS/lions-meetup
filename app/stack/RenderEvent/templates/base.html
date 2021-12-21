@@ -32,8 +32,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarExample01">
           <ul class="navbar-nav ms-auto d-flex flex-row">
-          {% if "user_data" in data %} 
           <a href="/event_registration.html" class="btn btn-primary me-2"><i class="fas fa-plus"></i></a>
+          {% if "user_data" in data and "user_id" in data["user_data"] and data["user_data"]["user_id"] %} 
           <div class="btn-group">
             <button
               type="button"
