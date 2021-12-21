@@ -2,7 +2,7 @@ import os
 import json
 import requests
 from jinja2 import Environment, FileSystemLoader
-
+from datetime import datetime
 
 
 def lambda_handler(event, context):
@@ -34,6 +34,8 @@ def lambda_handler(event, context):
     joined = True if list(filter(lambda x: (x["user_id"] == user_id or x["email"] == user_id), event_details["attendees"])) else False
     env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "templates"), encoding="utf8"))
     template = env.get_template("event.html")
+    event_details["start_local"] = datetime.strptime(event_details["start_local"], "%Y-%m-%dT%H:%M:%S").strftime("%m/%d/%Y at %H:%M ")
+    event_details["end_local"] = datetime.strptime(event_details["end_local"], "%Y-%m-%dT%H:%M:%S").strftime("%m/%d/%Y at %H:%M ")
     html = template.render(
         data = data,
         event = event_details,

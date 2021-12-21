@@ -54,7 +54,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderHome
-      CodeUri: s3://aws-sam-template-stack/32d549ba2062d5569d42cca733df0c87
+      CodeUri: s3://aws-sam-template-stack/c4e68f29fd3ed094c9c63c21b2f73339
       Description: Returns user home page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -93,7 +93,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderIndex
-      CodeUri: s3://aws-sam-template-stack/167810bda402665077f9ac35d90eb16f
+      CodeUri: s3://aws-sam-template-stack/15c40f96c25e6c8bfa942a3e9e9a4a2d
       Description: Returns update user Index page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -210,7 +210,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderEvent
-      CodeUri: s3://aws-sam-template-stack/185dd9d4451f98d983df55c55723b637
+      CodeUri: s3://aws-sam-template-stack/9ee98c4a359b0ac3f49c2f61bb181b19
       Description: Returns event page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9

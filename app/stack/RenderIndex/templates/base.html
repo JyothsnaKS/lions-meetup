@@ -70,6 +70,7 @@
     </select>
     {% set tags = ['food-and-drink','health', 'business', 'fashion', 'science-and-tech', 'sports-and-fitness', 'travel-and-outdoor', 'spirituality','charity-and-causes', 'auto-boat-and-air', 'film-and-media'] %}
     <select id="categories" class="custom-select w-25">
+      <option value="">Any</option>
       {% for tag in tags %}
         <option value="{{tag}}">{{tag | replace("-", " ")}}</option>
       {% endfor %}
