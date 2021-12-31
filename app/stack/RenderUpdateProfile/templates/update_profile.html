@@ -22,7 +22,7 @@
           </div>
           <h6>Age</h6>
           <div class="form-outline mb-4">
-            <input type="text" {{ "value='" +  user_data['age'] + "'" if 'age' in user_data else ''}}" id="age" class="form-control" />
+            <input type="text" {{ "value='" +  user_data['age']|string + "'" if 'age' in user_data else ''}}" id="age" class="form-control" />
           </div>
           <h6>Email</h6>
           <div class="form-outline mb-4">

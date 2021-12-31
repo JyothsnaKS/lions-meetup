@@ -18,7 +18,7 @@ def lambda_handler(event, context):
     event_details["item_id"] = str(int(event_details["item_id"]))
     # print([event for event in recommended_events])
        
-    joined_events_url = "https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/display_my_events?user_id" + user_id
+    joined_events_url = "https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/display_my_events?email=" + user_id
     joined_rec_resp = requests.get(joined_events_url)
     joined_resp_json = joined_rec_resp.json()
     joined_events = []
