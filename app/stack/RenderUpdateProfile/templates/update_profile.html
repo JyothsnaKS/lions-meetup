@@ -2,7 +2,7 @@
 {% block body %}
 
 <!-- content -->
-<main class="my-5">
+<main class="my-5 py-5">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -20,10 +20,23 @@
           <div class="form-outline mb-4">
             <input type="text" {{ "value='" +  user_data['mobile'] + "'" if 'mobile' in user_data else ''}}" id="mobile" class="form-control" />
           </div>
+          <h6>Age</h6>
+          <div class="form-outline mb-4">
+            <input type="text" {{ "value='" +  user_data['age'] + "'" if 'age' in user_data else ''}}" id="age" class="form-control" />
+          </div>
           <h6>Email</h6>
           <div class="form-outline mb-4">
             <input disabled type="text" value='{{ data["user_data"]["user_id"] }}' id="email" class="form-control" />
           </div>
+          <button type="submit" onclick='get_geo()' class="btn btn-warning">Get Current Location</button>
+
+          <h6 style="padding-top: 5%; padding-bottom: 5%;">Or Enter City State And Zip Below</h6>
+
+          <h6>Address</h6>
+          <div class="form-outline mb-4">
+            <input type="text" {{ "value='" +  user_data['address'] + "'" if 'address' in user_data else ''}}" id="address" class="form-control" />
+          </div>
+
           <h6>City</h6>
           <div class="form-outline mb-4">
             <input type="text" {{ "value='" +  user_data['city'] + "'" if 'city' in user_data else ''}}" id="city" class="form-control" />
@@ -34,24 +47,32 @@
           </div>
           <h6>Zip Code</h6>
           <div class="form-outline mb-4">
-            <input type="text" {{ "value='" +  user_data['zipcode'] + "'" if 'zipcode' in user_data else ''}}" id="zipcode" class="form-control" />
+            <input type="text" {{ "value='" +  user_data['zip_code'] + "'" if 'zip_code' in user_data else ''}}" id="zip_code" class="form-control" />
           </div>
+          <h6>Interests</h6>
+          {% set tags = ['food-and-drink','health', 'business', 'fashion', 'science-and-tech', 'sports-and-fitness', 'travel-and-outdoor', 'spirituality','charity-and-causes', 'auto-boat-and-air', 'film-and-media'] %}
           <div class="form-outline">
             <!-- <label class="form-label" for="tags">Select Your Interests</label> -->
-            <select id="tags" class="custom-select w-100 p-3 mb-4" multiple>
-              <option selected>None</option>
-              <option {{"selected" if "Sports" in user_data['tags'] else ""}} value="Sports">Sports</option>
-              <option {{"selected" if "Movies" in user_data['tags'] else ""}} value="Movies">Movies</option>
-              <option {{"selected" if "Shopping" in user_data['tags'] else ""}} value="Shopping">Shopping</option>
+            <select id="categories" class="custom-select w-100 p-3 mb-4" multiple>
+              {% for tag in tags %}
+                <option {{"selected" if tag in user_data['categories'] else ""}} value="{{tag}}">{{tag | replace("-", " ")}}</option>
+              {% endfor %}
             </select>
           </div>
+          <h6>Gender</h6>
           <div class="form-outline">
             <!-- <label class="form-label">Gender</label> -->
             <select id="gender" class="custom-select w-100 p-1 mb-4">
-              <option selected>None</option>
-              <option {{"selected" if "Male" == user_data["gender"] else ""}} value="Male">Male</option>
-              <option {{"selected" if "Female" == user_data["gender"] else ""}} value="Female">Female</option>
+              <option {{"selected" if "male" == (user_data["gender"].lower() if "gender" in user_data else "") else ""}} value="Male">Male</option>
+              <option {{"selected" if "female" == (user_data["gender"].lower() if "gender" in user_data else "") else ""}} value="Female">Female</option>
             </select>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="text" id="lat" class="form-control" hidden/>
+          </div>
+          <div class="form-outline mb-4">
+            <input type="text" id="long" class="form-control" hidden/>
           </div>
           <!-- Submit button -->
           <!-- <button type="submit" class="btn btn-primary btn-block mb-4">Create</button> -->
@@ -63,7 +84,7 @@
             </div>
             <div class="col">
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a class="btn btn-primary " href='/profile.html?user_id={{ data["user_data"]["user_id"] }}' role="button">
+                <a class="btn btn-primary " href='/profile.html?id={{ data["user_data"]["user_id"] }}' role="button">
                   View My Profile
                 </a>
               </div>

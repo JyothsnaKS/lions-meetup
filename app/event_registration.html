@@ -79,7 +79,7 @@
           <div class="col">
             <div class="form-outline mb-4">
               <label class="form-check-label" for="end_time"> To </label>
-              <input type="datetime-local" id="end_time" name="end_time" value="2021-12-12T19:30" min="2021-12-01T00:00"
+              <input type="datetime-local" id="end_time" name="end_time" value="2021-12-12T22:30" min="2021-12-01T00:00"
                 max="2022-12-14T00:00" required>
             </div>
           </div>
@@ -95,13 +95,23 @@
           <label class="form-label" for="category">Category</label>
         </div>
 
-        <div class="form-outline mb-4">
+        <!-- <div class="form-outline mb-4">
           <input type="text" id="sharable" class="form-control" required/>
           <label class="form-label" for="sharable">Sharable</label>
-        </div>
+        </div> -->
         <div class="form-outline mb-4">
           <input type="text" id="location" class="form-control" required/>
           <label class="form-label" for="location">Location</label>
+        </div>
+
+        <div class="form-outline">
+          <label class="form-label" for="tags">Tags</label>
+          <select id="tags" class="custom-select w-100 p-3 mb-4" multiple>
+            <option selected>None</option>
+            <option value="Sports">Sports</option>
+            <option value="Movies">Movies</option>
+            <option value="Shopping">Shopping</option>
+          </select>
         </div>
 
         <!-- <div class="form-outline mb-4">
