@@ -7,6 +7,7 @@ from jinja2 import Environment, FileSystemLoader
 def lambda_handler(event, context):
     # print(event)
     user_id = event["user_id"]
+    curr_user_id = event["curr_user_id"] if "curr_user_id" in event else None
     user_details_url = "https://1ptsftnwde.execute-api.us-east-1.amazonaws.com/test/get_user_profile?email=" + str(user_id) 
     rec_resp = requests.get(user_details_url)
     print(rec_resp.json())
@@ -16,7 +17,8 @@ def lambda_handler(event, context):
     data = {
         "user_data": {
           "user_id":user_id
-        }
+        },
+        "curr_user_id": curr_user_id
     }
     env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "templates"), encoding="utf8"))
     template = env.get_template("profile.html")

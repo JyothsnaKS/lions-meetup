@@ -63,7 +63,26 @@
     <!-- Navbar -->
   </header>
   <!--Main Navigation-->
-
+  <div class="input-group w-75 p-3 float-end">
+    <select id="type" class="custom-select w-25">
+      <option value="online">Online</option>
+      <option value="offline" selected>Offline</option>
+    </select>
+    {% set tags = ['food-and-drink','health', 'business', 'fashion', 'science-and-tech', 'sports-and-fitness', 'travel-and-outdoor', 'spirituality','charity-and-causes', 'auto-boat-and-air', 'film-and-media'] %}
+    <select id="categories" class="custom-select w-25">
+      <option value="">Any</option>
+      {% for tag in tags %}
+        <option value="{{tag}}">{{tag | replace("-", " ")}}</option>
+      {% endfor %}
+    </select>
+    <a class="btn btn-outline-dark" role="button" rel="nofollow" onclick="get_location()"
+    >
+    <i class="fas fa-map-marker-alt"></i>
+    </a>
+    <input type="search" id="query" class="form-control-sm rounded" placeholder="Search" aria-label="Search"
+    aria-describedby="search-addon" />
+    <button type="button" onclick="search_query()" class="btn btn-outline-primary">search</button>
+  </div>
   <!--Main layout-->
   {% block body %}
   {% endblock body %}

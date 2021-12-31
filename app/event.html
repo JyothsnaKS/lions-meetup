@@ -91,30 +91,29 @@
   <script>
     $(function () {
       var doc_cookie = document.cookie;
-      if (!doc_cookie) {
-        alert("Please Login!!"); // need to change , models etc.,
-        window.location.href = "/index.html";
-      } else {
+      var user_id = "None";
+      if(doc_cookie) {
         cookie_pair = doc_cookie.split("=");
         cookie_json = JSON.parse(cookie_pair[1]);
-        const queryString = (new URL(document.location)).searchParams;
-        console.log(queryString);
-        const urlParams = new URLSearchParams(queryString);
-        console.log(urlParams);
-        if (!urlParams.has("event_id")) {
-          alert("No Event ID / Invalid Event ID");
-          window.location.href = "/home.html"
-        } else {
-          event_id = urlParams.get("event_id")
-          console.log(event_id)
-          fetch("https://pbfg5ityf0.execute-api.us-east-1.amazonaws.com/default/RenderEvent?event_id=" + event_id + "&user_id=" + cookie_json["user_data"]["email"], {
-            method: 'GET'
-          }).then(response => response.json())
-            .then(data => {
-              console.log(data)
-              document.write(data["body"])
-            });
-        }
+        user_id = cookie_json["user_data"]["email"]
+      }
+      const queryString = (new URL(document.location)).searchParams;
+      console.log(queryString);
+      const urlParams = new URLSearchParams(queryString);
+      console.log(urlParams);
+      if (!urlParams.has("event_id")) {
+        alert("No Event ID / Invalid Event ID");
+        window.location.href = "/home.html"
+      } else {
+        event_id = urlParams.get("event_id")
+        console.log(event_id)
+        fetch("https://pbfg5ityf0.execute-api.us-east-1.amazonaws.com/default/RenderEvent?event_id=" + event_id + "&user_id=" + user_id, {
+          method: 'GET'
+        }).then(response => response.json())
+        .then(data => {
+          console.log(data)
+          document.write(data["body"])
+        });
       }
     });
   </script>
