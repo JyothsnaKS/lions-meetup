@@ -32,30 +32,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarExample01">
           <ul class="navbar-nav ms-auto d-flex flex-row">
-          {% if "user_data" in data %} 
-          <a href="/event_registration.html" class="btn btn-primary me-2"><i class="fas fa-plus"></i></a>
-          <div class="btn-group">
-            <button
-              type="button"
-              class="btn btn-primary dropdown-toggle"
-              data-mdb-toggle="dropdown"
-              aria-expanded="false"
-            >
-              {{ data["user_data"]["user_id"] }}
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href='/profile.html?id={{ data["user_data"]["user_id"] }}'>Profile</a></li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li><a class="dropdown-item" href="#" onclick="logout()">Logout</a></li>
-            </ul>
-          </div>
-          {% else %}
-            <li class="nav-item">
-              <a class="nav-link btn btn-primary" onclick="login()">Login</a>
-              </li>
-          {% endif %}
+            <!-- <li class="nav-item me-3 me-lg-0"> For notifications fillup
+              <a class="nav-link">
+                <i class="fas fa-bell"></i>
+              </a>
+            </li> -->
+            <li class="nav-item" id="user_nav">
+                
+            </li>
           </ul>
         </div>
       </div>
@@ -63,32 +47,18 @@
     <!-- Navbar -->
   </header>
   <!--Main Navigation-->
-  <div class="input-group w-75 p-3 float-end">
-    <select id="type" class="custom-select w-25">
-      <option value="online">Online</option>
-      <option value="offline" selected>Offline</option>
-    </select>
-    {% set tags = ['food-and-drink','health', 'business', 'fashion', 'science-and-tech', 'sports-and-fitness', 'travel-and-outdoor', 'spirituality','charity-and-causes', 'auto-boat-and-air', 'film-and-media'] %}
-    <select id="categories" class="custom-select w-25">
-      <option value="">Any</option>
-      {% for tag in tags %}
-        <option value="{{tag}}">{{tag | replace("-", " ")}}</option>
-      {% endfor %}
-    </select>
-    <a class="btn btn-outline-dark" role="button" rel="nofollow" onclick="get_location()"
-    >
-    <i class="fas fa-map-marker-alt"></i>
-    </a>
-    <input type="search" id="query" class="form-control-sm rounded" placeholder="Search" aria-label="Search"
-    aria-describedby="search-addon" />
-    <button type="button" onclick="search_query()" class="btn btn-outline-primary">search</button>
-  </div>
-  <!--Main layout-->
-  {% block body %}
-  {% endblock body %}
-  <!--Main layout-->
 
-  <!--Footer-->
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+
+
+<!-- content -->
+
+
+<!-- end content -->
+
+<!--Footer-->
   <footer class="bg-light text-lg-start">
     <hr class="m-0" />
 
@@ -118,8 +88,20 @@
     <!-- Custom scripts -->
     <script type="text/javascript" src="js/script.js"></script>
     <script>
-      {% block script %}
-      {% endblock script %}
+    $(function() {
+        cookie_json = check_cookie()
+        const queryString = (new URL(document.location)).searchParams;
+        console.log(queryString);
+        const urlParams = new URLSearchParams(queryString);
+        console.log(urlParams);
+        curr_user_id = cookie_json["user_data"]["email"]
+        fetch("https://pbfg5ityf0.execute-api.us-east-1.amazonaws.com/default/RenderProfile?user_id=" + urlParams.get("id") + "&curr_user_id=" + curr_user_id, {
+          method: 'GET'
+        }).then(response => response.json())
+          .then(data => {
+            document.write(data["body"])
+        });
+    });
     </script>
 </body>
 </html>
