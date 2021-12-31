@@ -4,75 +4,9 @@
 	"namespace": "com.amazonaws.personalize.schema",
 	"fields": [
 		{
-			"name": "organization_id",
-			"type": "float"
-		},
-		{
-			"name": "published",
-			"type": "string"
-		},
-		{
-			"name": "shareable",
-			"type": "string",
-			"categorical": true
-		},
-		{
 			"name": "online_event",
 			"type": "string",
 			"categorical": true
-		},
-		{
-			"name": "tx_time_limit",
-			"type": "int"
-		},
-		{
-			"name": "locale",
-			"type": "string"
-		},
-		{
-			"name": "is_locked",
-			"type": "string",
-			"categorical": true
-		},
-		{
-			"name": "privacy_setting",
-			"type": "string"
-		},
-		{
-			"name": "is_series",
-			"type": "string",
-			"categorical": true
-		},
-		{
-			"name": "is_series_parent",
-			"type": "string",
-			"categorical": true
-		},
-		{
-			"name": "inventory_type",
-			"type": "string"
-		},
-		{
-			"name": "is_reserved_seating",
-			"type": "string",
-			"categorical": true
-		},
-		{
-			"name": "source",
-			"type": "string"
-		},
-		{
-			"name": "is_free",
-			"type": "string",
-			"categorical": true
-		},
-		{
-			"name": "summary",
-			"type": "string"
-		},
-		{
-			"name": "facebook_event_id",
-			"type": "float"
 		},
 		{
 			"name": "organizer_id",
@@ -83,19 +17,11 @@
 			"type": "float"
 		},
 		{
-			"name": "category_id",
-			"type": "float"
-		},
-		{
-			"name": "subcategory_id",
-			"type": "float"
-		},
-		{
-			"name": "format_id",
-			"type": "float"
-		},
-		{
 			"name": "ITEM_ID",
+			"type": "string"
+		},
+		{
+			"name": "category",
 			"type": "string"
 		},
 		{
@@ -115,21 +41,8 @@
 			"type": "string"
 		},
 		{
-			"name": "start_utc",
-			"type": "string"
-		},
-		{
 			"name": "end_local",
 			"type": "string"
-		},
-		{
-			"name": "end_utc",
-			"type": "string"
-		},
-		{
-			"name": "is_externally_ticketed",
-			"type": "string",
-			"categorical": true
 		}
 	],
 	"version": "1.0"
