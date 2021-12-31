@@ -6,9 +6,9 @@
   <div class="container">
     <div class="row d-flex justify-content-center">
       <div class="col-md-3">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 20rem;">
           <img
-            src="https://mdbootstrap.com/img/new/standard/city/062.jpg"
+            src="https://i.redd.it/hk39ysv0zy561.png"
             class="card-img-top"
             alt="..."
           />
@@ -20,7 +20,7 @@
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Email: {{ data["user_data"]["user_id"] }} </li>
-            <li class="list-group-item">Interests: {{ ",".join(user_data["categories"]) if "categories" in user_data else "Missing Interests...Update Profile!!" }}</li>
+            <li class="list-group-item">Interests: {{ ",".join(user_data["categories"]) | replace("-", " ") if "categories" in user_data else "Missing Interests...Update Profile!!" }}</li>
             <li class="list-group-item">Location: {{ user_data["city"] if "city" in user_data else "Missing Location...Update Profile!!" }}</li>
           </ul>
         </div>

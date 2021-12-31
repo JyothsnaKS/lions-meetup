@@ -67,7 +67,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderProfile
-      CodeUri: s3://aws-sam-template-stack/1ce311698d359cb1ecb59390172c6054
+      CodeUri: s3://aws-sam-template-stack/6e7e4ba64efcd16f9f513f8c3ab16ef6
       Description: Returns user proofile page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -80,7 +80,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderUpdateProfile
-      CodeUri: s3://aws-sam-template-stack/36aa5166dacc4f1ca4a14a87623ef54a
+      CodeUri: s3://aws-sam-template-stack/1c9bad84ddf1da90b5423b6542151a1a
       Description: Returns update user proofile page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -145,7 +145,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderDiscussions
-      CodeUri: s3://aws-sam-template-stack/76675aab51396c7acd40c1b8e4736f3b
+      CodeUri: s3://aws-sam-template-stack/a7d096c0711c6f67aa7aa4a7450f3414
       Description: RenderDiscussions to user
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -197,7 +197,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderSearch
-      CodeUri: s3://aws-sam-template-stack/979b7ffe169bfd6229140148f4120893
+      CodeUri: s3://aws-sam-template-stack/e80a8870dd16d3071a22783ab0689596
       Description: RenderSearch to user
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
@@ -210,7 +210,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: RenderEvent
-      CodeUri: s3://aws-sam-template-stack/9ee98c4a359b0ac3f49c2f61bb181b19
+      CodeUri: s3://aws-sam-template-stack/ccf55c279d250ed157d92de257df0f63
       Description: Returns event page
       Handler: lambda_function.lambda_handler
       Runtime: python3.9

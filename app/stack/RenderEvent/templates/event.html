@@ -15,13 +15,16 @@
           <div class="card-body">
             <h5 class="card-title">{{ event["name_text"] }}</h5>
             <p class="card-text">
-              {{ event["summary"] }}
+              {{ event["description_text"] }}
             </p>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Starts: {{ event["start_local"] }}  Ends: {{ event["end_local"] }}</li>
             <li class="list-group-item">Event Category: {{ event["category"] | replace("-", " ") }}</li>
             <li class="list-group-item">Mode: {{ "Online" if event["online_event"] else "In Person" }}</li>
+            {% if "address" in event %}
+              <li class="list-group-item">Address: {{ event["address"] }}</li>
+            {% endif %}
           </ul>
           <div class="card-body">
             <a href="/discussions.html?id={{ event['item_id'] }}" class="btn btn-primary m-0" role="button" rel="nofollow">
